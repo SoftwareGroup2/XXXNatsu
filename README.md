@@ -39,7 +39,7 @@
 
 ## データ構造
 
-![各個人のカレンダー](https://raw.githubusercontent.com/SoftwareGroup2/XXXNatsu/master/img/calender.png)
+![各個人のカレンダー](img/calender.png)
 
 カレンダー: コマの属性に合わせたマスの集合
 コマ: 学年, 部活, 彼女(確率), 充P, 課P, 金
