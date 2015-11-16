@@ -68,9 +68,4 @@ typedef struct trout_t{
 ```
 
 ## 関数
-
-- 初期化
-	- init_program
-	- 引数:
-	- 戻り値:
-	- 内容:
+[Function.md](./Function.md)
