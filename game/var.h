@@ -1,6 +1,6 @@
 // カレンダー構造体
 typedef struct trout_t{
-    char content[200];  // 予定の内容(文章)
+    char content[CONTENT_LEN];  // 予定の内容(文章)
     int enhance_p;      // 充実ポイント(変化量)
     int task_p;         // 課題ポイント(変化量)
     int money_p;        // 金(変化量)
@@ -16,5 +16,5 @@ typedef struct player_t{
     int task_p;             // 課題ポイント
     int money_p;            // 金
     int day;                // 現在何日目か
-    TROUT_T calender[44];   // 自分のカレンダー
+    TROUT_T calender[CALENDER_LEN];   // 自分のカレンダー
 }PLAYER_T;
