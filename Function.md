@@ -18,7 +18,7 @@
  - 正常終了→TRUE
  - エラー発生→FALSE
 
-### int init_players(PLAYER_T \*head)
+### int init_players(PLAYER_T \*players)
 - 内容
 	- プレイヤー全員の初期化
 - 戻り値
@@ -29,7 +29,7 @@
 
 ### int init_player(PLAYER_T \*player)
 - 内容
-	- プレイヤー一人の初期化
+	- プレイヤー1人の初期化
 		- 名前，学年，部活，彼女，カレンダーは関数で初期化
 		- 各ポイントは定数なので代入で初期化
 - 戻り値
@@ -72,7 +72,7 @@
 ## ゲーム中関数群
 はじまってからの関数たち
 
-### game_main(PLAYER_T \*player)
+### void game_main(PLAYER_T \*players)
 - 内容
 	- 二重ループを回す
 	- 一重目は全員がゴールするまで
@@ -81,3 +81,50 @@
 	- 二重目は全員が一週間終わるまで
 		- 一番遅い人を調べる関数
 		- 1ターンの処理
+- 戻り値
+	- ナシ
+- 呼び出し
+	- select_active_player
+- 呼びだされ
+	- main
+
+### int select_active_player(PLAYER_T \*players)
+- 内容
+	- 一番後ろのプレイヤーのIDを返す
+- 戻り値
+	- プレイヤーのID(配列の添字)
+- 呼びだされ
+	- game_main
+
+### void move_player(PLAYER_T \*player)
+- 内容
+	- プレイヤー1人のターン処理
+		- サイコロを投げる
+		- 進む
+		- ステータスを変更
+- 戻り値
+	- ナシ
+- 呼び出し
+	- throw_dice
+- 呼びだされ
+	- game_main
+
+### int throw_dice(int n)
+- 内容
+	- 1~nの値をランダムで返す
+	- return (rand()%n) +1
+- 戻り値
+	- サイコロの目
+- 呼びだされ
+	- move_player
+
+# ミニゲームは保留します！！！！！！
+
+## ゲーム終了後処理関数群
+終わってからの関数たち
+
+### void game_end(PLAYER_T \*players)
+- 内容
+	- ポイントの計算
+	- 順位付け
+	- 表示
