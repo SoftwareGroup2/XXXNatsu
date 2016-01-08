@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "throw_dice.h"
 
 int throw_dice(int n)
 {
