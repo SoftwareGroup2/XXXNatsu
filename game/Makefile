@@ -12,3 +12,6 @@ init_player: ${USE_FILE}
 
 .c.o:
 	${CC} -c $<
+
+clean:
+	rm -f *.o ${ALL}
