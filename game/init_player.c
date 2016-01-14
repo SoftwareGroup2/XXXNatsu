@@ -113,25 +113,39 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     return 0;  // 正常終了で0を返す
 }
 
-int init_player(WINDOW *win, PLAYER_T *player){
-    // とりあえずplayer構造体にプレイヤー名がないので適当に作っておく。
-    char c;
-    // memo: cursesの座標指定では、y,x の順で指定する
+// ユーザの入力を含まない初期値設定
+int set_default_status(PLAYER_T *player){
+    player->enhance_p   = 100;  // 充実ポイント
+    player->task_p      = 3000; // 課題ポイント
+    player->girlfriend  = 0;    // 彼女の有無 (確率でやりたい)
+    player->money_p     = 1000; // 金
+    player->day         = 0;    // 現在の日付
 
+    return 0;
+}
+
+// ユーザ情報の入力メイン関数
+int init_player(WINDOW *win, PLAYER_T *player){
+    // memo: cursesの座標指定では、y,x の順で指定する
+    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 ->:u  <-:d");
     // プレイヤー名の入力
-    input_player_name(win, player, 1, 3);
+    input_player_name(win, player, 2, 3);
     // 学年の選択
-    select_grade(win, player, 2, 11);
+    select_grade(win, player, 3, 11);
     // 部活の選択
-    select_club(win, player, 3, 9);
+    select_club(win, player, 4, 9);
+
+    // デフォルトステータスの入力
+    set_default_status(player);
 
     // q キーを入力するまで待機
     wattrset(win, COLOR_PAIR(FONT_NORMAL));
-    mvwaddstr(win, 4, 1, "qキーを押して終了");
+    mvwaddstr(win, 5, 1, "qキーを押して終了");
     wwait_q(win);
 
     return 0;
 }
+
 
 int main(void){
     init_curses();
