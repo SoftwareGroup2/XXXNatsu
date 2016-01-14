@@ -19,8 +19,9 @@ int input_player_name(WINDOW *win, PLAYER_T *player){
 
     // このへんの座標指定は適当
     mvwaddstr(win, 1, 3, "プレイヤー名: ");
-    wgetstr(win, player->name);
+    wgetstr(win, player_name);
     wrefresh(win);
+
 
     return 0;  // 一応正常終了で0を返すって事で
 }
@@ -63,7 +64,7 @@ int init_player(WINDOW *win, PLAYER_T *player){
     // memo: cursesの座標指定では、y,x の順で指定する
 
     input_player_name(win, player);
-    mvwaddstr(win, 2, 17, player->name);
+    mvwaddstr(win, 2, 17, player_name);
     wrefresh(win);
 
     select_grade(win, player);
