@@ -13,6 +13,7 @@ int init_player(WINDOW *, PLAYER_T *);
 int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     echo();     // 入力した文字を画面に出力
     nocbreak(); // bakc spaceによる文字の訂正ができる
+    curs_set(1);// カーソルを表示
 
     // このへんの座標指定は適当
     mvwaddstr(win, y, x, "プレイヤー名: ");
@@ -27,8 +28,10 @@ int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
 int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     int grade=0;
     char c;
-    noecho(); // 入力した文字を画面に出力
-    cbreak(); // 入力をすぐに反映
+    noecho();   // 入力した文字を画面に出力
+    cbreak();   // 入力をすぐに反映
+    curs_set(0);// カーソルを非表示
+
     mvwaddstr(win, y, x, "学年: ");
 
     c = '\0';
@@ -45,12 +48,14 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
             default:
                 break;
         }
-        int pos_x=0;
+        int pos_x;
         for (pos_x = 0; pos_x < 5; pos_x++) {
             if (pos_x == grade) {
                 // 選択時の色を使う
+                wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
             }else{
                 // 非選択時の色を使う
+                wattrset(win, COLOR_PAIR(FONT_NORMAL));
             }
             mvwaddch(win, y, x+7+pos_x*2, pos_x+'1');
         }
@@ -67,8 +72,13 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
 int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     int club=0;
     char c;
+
+    char club_list[][12] = {"帰宅部", "運動部", "文化部"};
+
     noecho(); // 入力した文字を画面に出力
     cbreak(); // 入力をすぐに反映
+    curs_set(0);// カーソルを非表示
+
     mvwaddstr(win, y, x, "クラブ: ");
 
     c = '\0';
@@ -85,16 +95,16 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
             default:
                 break;
         }
-        switch(club){
-            case CLUB_NONE:
-                mvwaddstr(win, y, x+8, "帰宅部");
-                break;
-            case CLUB_SPORT:
-                mvwaddstr(win, y, x+8, "運動部");
-                break;
-            case CLUB_CULTURE:
-                mvwaddstr(win, y, x+8, "文化部");
-                break;
+        int s_club;
+        for (s_club = 0; s_club < 3; s_club++) {
+            if (s_club == club) {
+                // 選択時の色を使う
+                wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
+            }else{
+                // 非選択時の色を使う
+                wattrset(win, COLOR_PAIR(FONT_NORMAL));
+            }
+            mvwaddstr(win, y, x+8+s_club*7, club_list[s_club]);
         }
         wrefresh(win);
         c = wgetch(win);
@@ -116,6 +126,7 @@ int init_player(WINDOW *win, PLAYER_T *player){
     select_club(win, player, 3, 9);
 
     // q キーを入力するまで待機
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, 4, 1, "qキーを押して終了");
     wwait_q(win);
 
