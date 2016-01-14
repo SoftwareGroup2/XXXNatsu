@@ -9,6 +9,7 @@ typedef struct trout_t{
 
 // プレイヤー構造体
 typedef struct player_t{
+    char name[100];         // 名前
     int grade;              // 学年
     int club;               // 部活(帰宅部/運動部/文化部)
     int girlfriend;         // 彼女(いる/いない)
