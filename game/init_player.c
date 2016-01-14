@@ -9,25 +9,25 @@
 
 int init_player(WINDOW *, PLAYER_T *);
 
-int init_player(WINDOW *win, PLAYER_T *player){
-    // とりあえずplayer構造体にプレイヤー名がないので適当に作っておく。
-    char player_name[100];
-    char c;
-    // memo: cursesの座標指定では、y,x の順で指定する
-    echo();               // 入力した文字を画面に出力
+int input_player_name(WINDOW *, PLAYER_T *);
+int select_grade(WINDOW *, PLAYER_T *);
+
+// 名前の入力
+int input_player_name(WINDOW *win, PLAYER_T *player){
+    echo();     // 入力した文字を画面に出力
     nocbreak(); // bakc spaceによる文字の訂正ができる
 
     // このへんの座標指定は適当
-
-    // プレイヤー名の入力
     mvwaddstr(win, 1, 3, "プレイヤー名: ");
     wgetstr(win, player_name);
     wrefresh(win);
 
-    mvwaddstr(win, 2, 17, player_name);
-    wrefresh(win);
 
-    // 学年の入力
+    return 0;  // 一応正常終了で0を返すって事で
+}
+
+// 学年の選択
+int select_grade(WINDOW *win, PLAYER_T *player){
     int grade=0;
     noecho(); // 入力した文字を画面に出力
     cbreak(); // 入力をすぐに反映
@@ -53,7 +53,25 @@ int init_player(WINDOW *win, PLAYER_T *player){
     }while(c != 'q');
 
     player->grade = grade+1;
+
+    return 0; // 正常終了で0を返す
+}
+
+int init_player(WINDOW *win, PLAYER_T *player){
+    // とりあえずplayer構造体にプレイヤー名がないので適当に作っておく。
+    char player_name[100];
+    char c;
+    // memo: cursesの座標指定では、y,x の順で指定する
+
+    input_player_name(win, player);
+    mvwaddstr(win, 2, 17, player_name);
+    wrefresh(win);
+
+    select_grade(win, player);
     mvwaddch(win, 5, 9, player->grade+'0');
+
+    // 部活の選択
+    int club=0;
 
     // q キーを入力するまで待機
     wwait_q(win);
