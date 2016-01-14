@@ -9,17 +9,14 @@
 
 int init_player(WINDOW *, PLAYER_T *);
 
-int input_player_name(WINDOW *, PLAYER_T *);
-int select_grade(WINDOW *, PLAYER_T *);
-
 // 名前の入力
-int input_player_name(WINDOW *win, PLAYER_T *player){
+int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     echo();     // 入力した文字を画面に出力
     nocbreak(); // bakc spaceによる文字の訂正ができる
 
     // このへんの座標指定は適当
-    mvwaddstr(win, 1, 3, "プレイヤー名: ");
-    wgetstr(win, player_name);
+    mvwaddstr(win, y, x, "プレイヤー名: ");
+    wgetstr(win, player->name);
     wrefresh(win);
 
 
@@ -27,11 +24,12 @@ int input_player_name(WINDOW *win, PLAYER_T *player){
 }
 
 // 学年の選択
-int select_grade(WINDOW *win, PLAYER_T *player){
+int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     int grade=0;
+    char c;
     noecho(); // 入力した文字を画面に出力
     cbreak(); // 入力をすぐに反映
-    mvwaddstr(win, 4, 3, "学年: ");
+    mvwaddstr(win, y, x, "学年: ");
 
     c = '\0';
     do{
@@ -47,33 +45,70 @@ int select_grade(WINDOW *win, PLAYER_T *player){
             default:
                 break;
         }
-        mvwaddch(win, 4, 9, grade+'1');
+        mvwaddch(win, y, x+6, grade+'1');
         wrefresh(win);
         c = wgetch(win);
-    }while(c != 'q');
+    }while(c != '\n');
 
     player->grade = grade+1;
 
     return 0; // 正常終了で0を返す
 }
 
+// 部活を選択
+int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
+    int club=0;
+    char c;
+    noecho(); // 入力した文字を画面に出力
+    cbreak(); // 入力をすぐに反映
+    mvwaddstr(win, y, x, "クラブ: ");
+
+    c = '\0';
+    do{
+        switch(c){
+            case 'd':
+                // case KEY_DOWN: // KEY_DOWN などは環境依存
+                club = (club+2)%3;
+                break;
+            case 'u':
+                //case KEY_UP:
+                club = (club+1)%3;
+                break;
+            default:
+                break;
+        }
+        switch(club){
+            case CLUB_NONE:
+                mvwaddstr(win, y, x+8, "帰宅部");
+                break;
+            case CLUB_SPORT:
+                mvwaddstr(win, y, x+8, "運動部");
+                break;
+            case CLUB_CULTURE:
+                mvwaddstr(win, y, x+8, "文化部");
+                break;
+        }
+        wrefresh(win);
+        c = wgetch(win);
+    }while(c != '\n');
+
+    return 0;  // 正常終了で0を返す
+}
+
 int init_player(WINDOW *win, PLAYER_T *player){
     // とりあえずplayer構造体にプレイヤー名がないので適当に作っておく。
-    char player_name[100];
     char c;
     // memo: cursesの座標指定では、y,x の順で指定する
 
-    input_player_name(win, player);
-    mvwaddstr(win, 2, 17, player_name);
-    wrefresh(win);
-
-    select_grade(win, player);
-    mvwaddch(win, 5, 9, player->grade+'0');
-
+    // プレイヤー名の入力
+    input_player_name(win, player, 1, 3);
+    // 学年の選択
+    select_grade(win, player, 2, 11);
     // 部活の選択
-    int club=0;
+    select_club(win, player, 3, 9);
 
     // q キーを入力するまで待機
+    mvwaddstr(win, 4, 1, "qキーを押して終了");
     wwait_q(win);
 
     return 0;
