@@ -141,11 +141,11 @@ int init_player(WINDOW *win, PLAYER_T *player){
     // q キーを入力するまで待機
     wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, 5, 1, "qキーを押して終了");
+
     wwait_q(win);
 
     return 0;
 }
-
 
 int main(void){
     init_curses();
