@@ -3,5 +3,6 @@
 
 void init_curses(void);
 void end_curses(void);
+void wwait_q(WINDOW *win);
 
-#endif _USE_CURSES_H_
+#endif // _USE_CURSES_H_

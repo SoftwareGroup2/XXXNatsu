@@ -11,8 +11,14 @@ void init_curses(void){
     // 入力に関する設定
     noecho();               // 入力した文字を画面に出力させない
     keypad(stdscr, true);   // キーボード入力を有効
-    wtimeout(stdscr, 100);  // 100ミリ秒でgetchをタイムアウ
+//    wtimeout(stdscr, 100);  // 100ミリ秒でgetchをタイムアウ
     cbreak();               // 入力を即座にプログラムに渡す(bakc spaceによる文字の訂正ができなくなる)
+}
+
+void wwait_q(WINDOW *win){
+    wtimeout(stdscr, 100);
+    cbreak();
+    while (wgetch(win) != 'q');
 }
 
 // cursesの終了処理
@@ -20,7 +26,7 @@ void end_curses(void){
     endwin();
 }
 
-int main(void){
+int _main(void){
     // cursesを使うための初期化
     init_curses();
 
