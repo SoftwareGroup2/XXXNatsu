@@ -1,0 +1,9 @@
+CC=gcc
+
+all: program_init
+
+program_init: program_init.o
+	$(CC) -o $@ $^
+
+.c.o:
+	$(CC) -c $<
