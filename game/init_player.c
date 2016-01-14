@@ -45,7 +45,15 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
             default:
                 break;
         }
-        mvwaddch(win, y, x+6, grade+'1');
+        int pos_x=0;
+        for (pos_x = 0; pos_x < 5; pos_x++) {
+            if (pos_x == grade) {
+                // 選択時の色を使う
+            }else{
+                // 非選択時の色を使う
+            }
+            mvwaddch(win, y, x+7+pos_x*2, pos_x+'1');
+        }
         wrefresh(win);
         c = wgetch(win);
     }while(c != '\n');
