@@ -13,7 +13,7 @@ void init_curses(void){
     // 入力に関する設定
     noecho();               // 入力した文字を画面に出力させない
     keypad(stdscr, true);   // キーボード入力を有効
-//    wtimeout(stdscr, 100);  // 100ミリ秒でgetchをタイムアウ
+    // wtimeout(stdscr, 100);  // 100ミリ秒でgetchをタイムアウ
     cbreak();               // 入力を即座にプログラムに渡す(bakc spaceによる文字の訂正ができなくなる)
     curs_set(0);            // カーソルを非表示に 1 でカーソルを表示 (環境依存でうまくいかないらしい)
 
@@ -27,6 +27,7 @@ void init_curses(void){
     init_pair(FONT_NORMAL_SELECT, COLOR_BLACK, COLOR_WHITE);
 }
 
+// qが押されるまで終了待ち
 void wwait_q(WINDOW *win){
     wtimeout(stdscr, 100);
     cbreak();
@@ -36,22 +37,4 @@ void wwait_q(WINDOW *win){
 // cursesの終了処理
 void end_curses(void){
     endwin();
-}
-
-int _main(void){
-    // cursesを使うための初期化
-    init_curses();
-
-    // qが入力されるまで待機
-    do{
-        attrset(COLOR_PAIR(FONT_NORMAL_SELECT));
-        // attrset(COLOR_PAIR(FONT_NORMAL));
-        mvprintw(10,10,"あああ");
-        refresh();
-    }while(getch() != 'q');
-
-    // cursesの終了処理
-    end_curses();
-
-    return 0;
 }

@@ -1,3 +1,6 @@
+// #ifndef _DEF_H_
+// #define _DEF_H_
+
 // 論理値
 #define TRUE 1
 #define FALSE 0
@@ -23,3 +26,5 @@
 #define CLUB_NONE 0
 #define CLUB_SPORT 1
 #define CLUB_CULTURE 2
+
+// #endif // _DEF_H_
