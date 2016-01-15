@@ -149,7 +149,7 @@ int init_player(WINDOW *win, PLAYER_T *player){
     return 0;
 }
 
-int main(void){
+int main_init_player(void){
     init_curses();
 
     PLAYER_T player1;
