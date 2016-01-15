@@ -25,7 +25,6 @@ void init_curses(void){
     // init_pair( 登録番号, 文字色, 背景色);
     init_pair(FONT_NORMAL, COLOR_WHITE, COLOR_BLACK);
     init_pair(FONT_NORMAL_SELECT, COLOR_BLACK, COLOR_WHITE);
-
 }
 
 void wwait_q(WINDOW *win){
