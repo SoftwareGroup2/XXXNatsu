@@ -110,7 +110,7 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
         wrefresh(win);
         c = wgetch(win);
     }while(c != '\n');
-    player->club = s_club;
+    player->club = club;
 
     return 0;  // 正常終了で0を返す
 }
@@ -149,7 +149,7 @@ int init_player(WINDOW *win, PLAYER_T *player){
     return 0;
 }
 
-int __main(void){
+int main_init_player(void){
     init_curses();
 
     PLAYER_T player1;
