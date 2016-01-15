@@ -35,7 +35,7 @@ void print_players_status(PLAYER_T players[]){
     }
 }
 
-int main(){
+int ___main(){
     // プレイヤー数もどこかで定数としておいたほうがよさそう。
     int i;
     WINDOW *win;
@@ -55,4 +55,3 @@ int main(){
 
     return 0;
 }
-
