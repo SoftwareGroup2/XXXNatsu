@@ -1,4 +1,5 @@
 // init_playerは前提としてcursesのinit,endが他関数で実行されるものと考える
+//
 
 #include <stdio.h>
 #include <curses.h>
