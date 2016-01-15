@@ -8,6 +8,9 @@
 
 #define MAX_ROW_SIZE 1000
 
+// 元のカレンダーをグローバル変数で持つって仕様を完全に無視してしまった。
+// なんだか問題が出たら誰か修正して... H28/1/15
+
 // 1つのカレンダーを構造体配列に読み込む
 int load_base_calender(TROUT_T *cal, char *file_name){
     int i;
@@ -46,13 +49,25 @@ void disp_calender(TROUT_T *cal){
 int program_init(TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
 	srand((unsigned)time(NULL));
 
+    // 配列にすべてのカレンダーを読み込む
+    // 適宜ファイル名を変更して読み込み部分を作成する
     load_base_calender(base_cal[CK_BASE], "../data/1_basecalender.csv");
-    disp_calender(base_cal[CK_BASE]);
+    load_base_calender(base_cal[CK_1], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_2], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_3], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_4], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_5], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_SPORT], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_CULTURE], "../data/1_basecalender.csv");
+    load_base_calender(base_cal[CK_GF], "../data/1_basecalender.csv");
+
+    // きちんと読み込めているかテスト
+    disp_calender(base_cal[CK_GF]);
 
     return 0;
 }
 
-int main(void) {
+int _main(void) {
     TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1];
     program_init(base_cal);
 }
