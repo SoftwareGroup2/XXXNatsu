@@ -80,6 +80,7 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     cbreak(); // 入力をすぐに反映
     curs_set(0);// カーソルを非表示
 
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y, x, "クラブ: ");
 
     c = '\0';
@@ -145,28 +146,6 @@ int init_player(WINDOW *win, PLAYER_T *player){
     mvwaddstr(win, 5, 1, "qキーを押して終了");
 
     wwait_q(win);
-
-    return 0;
-}
-
-int main_init_player(void){
-    init_curses();
-
-    PLAYER_T player1;
-
-    // windowの作成処理
-    WINDOW *win;
-    win = newwin(LINES,COLS-1,0,0);
-    box(win,'|','-');
-
-    // 作成した関数
-    init_player(win, &player1);
-
-    // windowの終了処理
-    wclear(win);
-    wrefresh(win);
-
-    end_curses();
 
     return 0;
 }

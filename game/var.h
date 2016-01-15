@@ -1,3 +1,6 @@
+// #ifndef _DEF_H_
+// #define _DEF_H_
+
 // カレンダー構造体
 typedef struct trout_t{
     char content[CONTENT_LEN];  // 予定の内容(文章)
@@ -19,3 +22,5 @@ typedef struct player_t{
     int day;                // 現在何日目か
     TROUT_T calender[CALENDER_LEN];   // 自分のカレンダー
 }PLAYER_T;
+
+// #endif // _DEF_H_

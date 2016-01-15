@@ -34,24 +34,3 @@ void print_players_status(PLAYER_T players[]){
         printf("%5s : %d\n", "日付", players[i].day);
     }
 }
-
-int ___main(){
-    // プレイヤー数もどこかで定数としておいたほうがよさそう。
-    int i;
-    WINDOW *win;
-    PLAYER_T players[4];
-
-
-    init_curses();
-    // 適当にwindowを作成
-    win = newwin(LINES,COLS-1,0,0);
-    box(win,'|','-');
-
-    init_players(win, players);
-
-    end_curses();
-
-    print_players_status(players);
-
-    return 0;
-}
