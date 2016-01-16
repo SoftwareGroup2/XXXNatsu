@@ -20,7 +20,7 @@ typedef struct player_t{
     int task_p;             // 課題ポイント
     int money_p;            // 金
     int day;                // 現在何日目か
-    TROUT_T calender[CALENDER_LEN];   // 自分のカレンダー
+    TROUT_T calender[CALENDER_LEN+1];   // 自分のカレンダー
 }PLAYER_T;
 
 // #endif // _DEF_H_
