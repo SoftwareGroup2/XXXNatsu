@@ -31,6 +31,9 @@ test-select_active_player.out : test-select_active_player.c $(OBJ_DIR)/select_ac
 test-program_init.out : test-program_init.c $(OBJ_DIR)/program_init.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
+test-init_calender.out : test-init_calender.c $(OBJ_DIR)/program_init.o $(OBJ_DIR)/init_calender.o
+	$(CC) $(INCLUDE) -o $@ $^
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@[ -d $(OBJ_DIR) ]
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<

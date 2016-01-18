@@ -61,7 +61,7 @@ int program_init(TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
 
     // 配列にすべてのカレンダーを読み込む
     // 適宜ファイル名を変更して読み込み部分を作成する
-    load_base_calender(base_cal[CK_BASE], "../data/grade1.csv");
+    load_base_calender(base_cal[CK_BASE], "../data/base.csv");
     load_base_calender(base_cal[CK_1], "../data/grade1.csv");
     load_base_calender(base_cal[CK_2], "../data/grade2.csv");
     load_base_calender(base_cal[CK_3], "../data/grade3.csv");
