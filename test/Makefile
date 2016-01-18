@@ -28,6 +28,9 @@ test-init_players.out : test-init_players.c $(OBJ_DIR)/init_players.o $(OBJ_DIR)
 test-select_active_player.out : test-select_active_player.c $(OBJ_DIR)/select_active_player.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
+test-program_init.out : test-program_init.c $(OBJ_DIR)/program_init.o
+	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
+
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@[ -d $(OBJ_DIR) ]
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
