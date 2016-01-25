@@ -32,10 +32,10 @@ int main(void){
     disp_calender(player.calender);
 
 
-    // 10回ぐらい適当に行動させて、その時々のステータスを表示する
+    // 適当に行動させて、その時々のステータスを表示する
     int old_day;
     int i;
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 15; i++) {
         old_day = player.day;
         move_player(&player);
         printf("----------------------------------------\n");
