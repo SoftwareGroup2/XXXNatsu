@@ -1,8 +1,9 @@
 // init_playerは前提としてcursesのinit,endが他関数で実行されるものと考える
-//
 
-#include <stdio.h>
 #include <curses.h>
+
+#include <time.h>
+#include <stdlib.h>
 
 #include "def.h"
 #include "var.h"
@@ -120,7 +121,10 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
 int set_default_status(PLAYER_T *player){
     player->enhance_p   = 100;  // 充実ポイント
     player->task_p      = 3000; // 課題ポイント
-    player->girlfriend  = 0;    // 彼女の有無 (確率でやりたい)
+    // 彼女の発生確率は1/5
+    player->girlfriend  = (rand()%5 ? 0 : 1);
+    // この部分では，0~4の乱数を発生させ，0(false)だった場合のみ彼女がいるとする
+
     player->money_p     = 1000; // 金
     player->day         = 0;    // 現在の日付
 
