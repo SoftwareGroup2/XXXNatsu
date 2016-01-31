@@ -14,7 +14,7 @@ SRC_DIR= ../game
 
 INCLUDE=-I../game/
 
-all: test-use_curses.out test-init_player.out test-init_players.out test-select_active_player.out test-throw_dice.out
+all: test-use_curses.out test-init_player.out test-init_players.out test-select_active_player.out test-throw_dice.out test-disp_game_window
 
 test-use_curses.out : test-use_curses.c $(OBJ_DIR)/use_curses.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
@@ -36,6 +36,9 @@ test-init_calender.out : test-init_calender.c $(OBJ_DIR)/program_init.o $(OBJ_DI
 
 test-throw_dice.out : test-throw_dice.c $(OBJ_DIR)/throw_dice.o
 	$(CC) $(INCLUDE) -o $@ $^
+
+test-disp_game_window : test-disp_game_window.c $(OBJ_DIR)/disp_game_window.o $(OBJ_DIR)/use_curses.o
+	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@[ -d $(OBJ_DIR) ]
