@@ -29,7 +29,7 @@ int load_base_calender(TROUT_T *cal, char *file_name){
 
     if ((fp = fopen( file_name, "r")) == NULL) {
         printf("ファイル: %s が開けません\n", file_name);
-        exit(EXIT_FAILURE);
+        return FALSE;
     }
 
     // まず初期化
@@ -44,7 +44,7 @@ int load_base_calender(TROUT_T *cal, char *file_name){
         cal[day].move_day  = move_day;
     }
 
-    return 0;
+    return TRUE;
 }
 
 // カレンダーの内容を表示
@@ -61,15 +61,15 @@ int program_init(TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
 
     // 配列にすべてのカレンダーを読み込む
     // 適宜ファイル名を変更して読み込み部分を作成する
-    load_base_calender(base_cal[CK_BASE], "../data/base.csv");
-    load_base_calender(base_cal[CK_1], "../data/grade1.csv");
-    load_base_calender(base_cal[CK_2], "../data/grade2.csv");
-    load_base_calender(base_cal[CK_3], "../data/grade3.csv");
-    load_base_calender(base_cal[CK_4], "../data/grade4.csv");
-    load_base_calender(base_cal[CK_5], "../data/grade5.csv");
-    load_base_calender(base_cal[CK_SPORT], "../data/sport.csv");
-    load_base_calender(base_cal[CK_CULTURE], "../data/culture.csv");
-    load_base_calender(base_cal[CK_GF], "../data/gf.csv");
+    if(load_base_calender(base_cal[CK_BASE], "../data/base.csv")==FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_1], "../data/grade1.csv")==FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_2], "../data/grade2.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_3], "../data/grade3.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_4], "../data/grade4.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_5], "../data/grade5.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_SPORT], "../data/sport.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_CULTURE], "../data/culture.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_GF], "../data/gf.csv") == FALSE) return FALSE;
 
-    return 0;
+    return TRUE;
 }
