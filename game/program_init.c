@@ -57,7 +57,7 @@ void disp_calender(TROUT_T *cal){
 }
 
 int program_init(TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
-	srand((unsigned)time(NULL));
+    srand((unsigned)time(NULL));
 
     // 配列にすべてのカレンダーを読み込む
     // 適宜ファイル名を変更して読み込み部分を作成する
