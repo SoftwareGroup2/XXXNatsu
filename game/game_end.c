@@ -33,6 +33,9 @@ void game_end(WINDOW *win, PLAYER_T players[]){
     }
 
     // タイトルの表示
+    box(win,'|','-');
+    wrefresh(win);
+
     yy = 5;
     mvwprintw(win, yy, x_pos+15,"XXXの夏休み");
     mvwprintw(win, yy+2, x_pos+50," 製作: 2班");

@@ -14,6 +14,7 @@
 #include "throw_dice.h"
 #include "use_curses.h"
 #include "select_active_player.h"
+#include "disp_game_window.h"
 #include "game_end.h"
 
 void game_main(WINDOW *main_win, TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1], PLAYER_T players[4]){
@@ -23,6 +24,7 @@ void game_main(WINDOW *main_win, TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]
     // 最後のプレイヤーがゴールするまでループ
     move_player_id = select_active_player(players);
     while(players[move_player_id].day <= 44){
+        main_2(main_win, players, move_player_id);
         move_player(&players[move_player_id]);
         move_player_id = select_active_player(players);
     }
