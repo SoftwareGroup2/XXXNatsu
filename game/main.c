@@ -14,6 +14,7 @@
 #include "throw_dice.h"
 #include "use_curses.h"
 #include "select_active_player.h"
+#include "game_end.h"
 
 void game_main(WINDOW *main_win, TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1], PLAYER_T players[4]){
     int i,j;
@@ -47,9 +48,10 @@ int main(int argc, const char *argv[])
 
     // プレイヤーの初期化
     init_players(main_win, players);
-
     // ゲームメイン
-    game_main( main_win, base_cal, players);
+    game_main(main_win, base_cal, players);
+    // ゲーム終了
+    game_end(main_win, players);
 
     // cursesの終了
     end_curses();

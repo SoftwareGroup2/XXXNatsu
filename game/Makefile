@@ -16,7 +16,7 @@ INCLUDE=-I../game/
 
 all: game_main.out
 
-game_main.out : main.c $(OBJ_DIR)/move_player.o $(OBJ_DIR)/program_init.o $(OBJ_DIR)/init_player.o $(OBJ_DIR)/init_players.o $(OBJ_DIR)/init_calender.o $(OBJ_DIR)/throw_dice.o $(OBJ_DIR)/use_curses.o $(OBJ_DIR)/select_active_player.o
+game_main.out : main.c $(OBJ_DIR)/move_player.o $(OBJ_DIR)/program_init.o $(OBJ_DIR)/init_player.o $(OBJ_DIR)/init_players.o $(OBJ_DIR)/init_calender.o $(OBJ_DIR)/throw_dice.o $(OBJ_DIR)/use_curses.o $(OBJ_DIR)/select_active_player.o $(OBJ_DIR)/game_end.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 	cp game_main.out ../bin/game_main.out
 
