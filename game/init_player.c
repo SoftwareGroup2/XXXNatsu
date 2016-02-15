@@ -9,10 +9,10 @@
 #include "var.h"
 #include "use_curses.h"
 
-int init_player(WINDOW *, PLAYER_T *);
+void init_player(WINDOW *, PLAYER_T *);
 
 // 名前の入力
-int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
+void input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     echo();     // 入力した文字を画面に出力
     nocbreak(); // bakc spaceによる文字の訂正ができる
     curs_set(1);// カーソルを表示
@@ -21,13 +21,10 @@ int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     mvwaddstr(win, y, x, "プレイヤー名: ");
     wgetstr(win, player->name);
     wrefresh(win);
-
-
-    return 0;  // 一応正常終了で0を返すって事で
 }
 
 // 学年の選択
-int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
+void select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     int grade=0;
     char c;
     noecho();   // 入力した文字を画面に出力
@@ -66,12 +63,10 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     }while(c != '\n');
 
     player->grade = grade+1;
-
-    return 0; // 正常終了で0を返す
 }
 
 // 部活を選択
-int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
+void select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     int club=0;
     char c;
 
@@ -113,12 +108,10 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
         c = wgetch(win);
     }while(c != '\n');
     player->club = club;
-
-    return 0;  // 正常終了で0を返す
 }
 
 // ユーザの入力を含まない初期値設定
-int set_default_status(PLAYER_T *player){
+void set_default_status(PLAYER_T *player){
     player->enhance_p   = 100;  // 充実ポイント
     player->task_p      = 3000; // 課題ポイント
     // 彼女の発生確率は1/5
@@ -127,12 +120,10 @@ int set_default_status(PLAYER_T *player){
 
     player->money_p     = 1000; // 金
     player->day         = 0;    // 現在の日付
-
-    return 0;
 }
 
 // ユーザ情報の入力メイン関数
-int init_player(WINDOW *win, PLAYER_T *player){
+void init_player(WINDOW *win, PLAYER_T *player){
     // memo: cursesの座標指定では、y,x の順で指定する
     mvwaddstr(win, 1, 10, "プレイヤー情報を入力 ->:u  <-:d");
     // プレイヤー名の入力
@@ -151,5 +142,4 @@ int init_player(WINDOW *win, PLAYER_T *player){
 
     wwait_q(win);
 
-    return 0;
 }
