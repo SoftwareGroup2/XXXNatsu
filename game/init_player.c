@@ -1,17 +1,18 @@
 // init_playerは前提としてcursesのinit,endが他関数で実行されるものと考える
-//
 
-#include <stdio.h>
 #include <curses.h>
+
+#include <time.h>
+#include <stdlib.h>
 
 #include "def.h"
 #include "var.h"
 #include "use_curses.h"
 
-int init_player(WINDOW *, PLAYER_T *);
+void init_player(WINDOW *, PLAYER_T *);
 
 // 名前の入力
-int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
+void input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     echo();     // 入力した文字を画面に出力
     nocbreak(); // bakc spaceによる文字の訂正ができる
     curs_set(1);// カーソルを表示
@@ -20,13 +21,10 @@ int input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     mvwaddstr(win, y, x, "プレイヤー名: ");
     wgetstr(win, player->name);
     wrefresh(win);
-
-
-    return 0;  // 一応正常終了で0を返すって事で
 }
 
 // 学年の選択
-int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
+void select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     int grade=0;
     char c;
     noecho();   // 入力した文字を画面に出力
@@ -38,11 +36,19 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     c = '\0';
     do{
         switch(c){
-            case 'd':
+            case 'a':
             // case KEY_DOWN: // KEY_DOWN などは環境依存
                 grade = (grade+4)%5;
                 break;
-            case 'u':
+            case 's':
+            // case KEY_DOWN: // KEY_DOWN などは環境依存
+                grade = (grade+4)%5;
+                break;
+            case 'w':
+            //case KEY_UP:
+                grade = (grade+1)%5;
+                break;
+            case 'd':
             //case KEY_UP:
                 grade = (grade+1)%5;
                 break;
@@ -65,12 +71,10 @@ int select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     }while(c != '\n');
 
     player->grade = grade+1;
-
-    return 0; // 正常終了で0を返す
 }
 
 // 部活を選択
-int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
+void select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     int club=0;
     char c;
 
@@ -86,11 +90,19 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     c = '\0';
     do{
         switch(c){
-            case 'd':
+            case 'a':
                 // case KEY_DOWN: // KEY_DOWN などは環境依存
                 club = (club+2)%3;
                 break;
-            case 'u':
+            case 's':
+                // case KEY_DOWN: // KEY_DOWN などは環境依存
+                club = (club+2)%3;
+                break;
+            case 'd':
+                //case KEY_UP:
+                club = (club+1)%3;
+                break;
+            case 'w':
                 //case KEY_UP:
                 club = (club+1)%3;
                 break;
@@ -112,25 +124,24 @@ int select_club(WINDOW *win, PLAYER_T *player, int y, int x){
         c = wgetch(win);
     }while(c != '\n');
     player->club = club;
-
-    return 0;  // 正常終了で0を返す
 }
 
 // ユーザの入力を含まない初期値設定
-int set_default_status(PLAYER_T *player){
+void set_default_status(PLAYER_T *player){
     player->enhance_p   = 100;  // 充実ポイント
     player->task_p      = 3000; // 課題ポイント
-    player->girlfriend  = 0;    // 彼女の有無 (確率でやりたい)
+    // 彼女の発生確率は1/5
+    player->girlfriend  = (rand()%5 ? 0 : 1);
+    // この部分では，0~4の乱数を発生させ，0(false)だった場合のみ彼女がいるとする
+
     player->money_p     = 1000; // 金
     player->day         = 0;    // 現在の日付
-
-    return 0;
 }
 
 // ユーザ情報の入力メイン関数
-int init_player(WINDOW *win, PLAYER_T *player){
+void init_player(WINDOW *win, PLAYER_T *player){
     // memo: cursesの座標指定では、y,x の順で指定する
-    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 ->:u  <-:d");
+    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 (wasdキーで操作)");
     // プレイヤー名の入力
     input_player_name(win, player, 2, 3);
     // 学年の選択
@@ -147,5 +158,4 @@ int init_player(WINDOW *win, PLAYER_T *player){
 
     wwait_q(win);
 
-    return 0;
 }

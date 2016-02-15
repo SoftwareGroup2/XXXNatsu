@@ -1,6 +1,10 @@
 // init_playerをテストする
 
+#include <stdio.h>
 #include <curses.h>
+
+#include <stdlib.h>
+#include <time.h>
 
 #include "def.h"
 #include "var.h"
@@ -8,6 +12,9 @@
 #include "init_player.h"
 
 int main(void){
+
+    srand((unsigned)time(NULL));
+
     init_curses();
 
     PLAYER_T player1;
@@ -25,6 +32,14 @@ int main(void){
     wrefresh(win);
 
     end_curses();
+
+    printf("名前: %s\n",player1.name);
+    printf("学年: %d\n",player1.grade);
+    printf("部活: %d\n",player1.club);
+    printf("彼女: %d\n\n",player1.girlfriend);
+    printf("充実: %d\n",player1.enhance_p);
+    printf("課題: %d\n",player1.task_p);
+    printf("日付: %d\n",player1.day);
 
     return 0;
 }
