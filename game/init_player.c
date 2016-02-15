@@ -36,11 +36,19 @@ void select_grade(WINDOW *win, PLAYER_T *player, int y, int x){
     c = '\0';
     do{
         switch(c){
-            case 'd':
+            case 'a':
             // case KEY_DOWN: // KEY_DOWN などは環境依存
                 grade = (grade+4)%5;
                 break;
-            case 'u':
+            case 's':
+            // case KEY_DOWN: // KEY_DOWN などは環境依存
+                grade = (grade+4)%5;
+                break;
+            case 'w':
+            //case KEY_UP:
+                grade = (grade+1)%5;
+                break;
+            case 'd':
             //case KEY_UP:
                 grade = (grade+1)%5;
                 break;
@@ -82,11 +90,19 @@ void select_club(WINDOW *win, PLAYER_T *player, int y, int x){
     c = '\0';
     do{
         switch(c){
-            case 'd':
+            case 'a':
                 // case KEY_DOWN: // KEY_DOWN などは環境依存
                 club = (club+2)%3;
                 break;
-            case 'u':
+            case 's':
+                // case KEY_DOWN: // KEY_DOWN などは環境依存
+                club = (club+2)%3;
+                break;
+            case 'd':
+                //case KEY_UP:
+                club = (club+1)%3;
+                break;
+            case 'w':
                 //case KEY_UP:
                 club = (club+1)%3;
                 break;
@@ -125,7 +141,7 @@ void set_default_status(PLAYER_T *player){
 // ユーザ情報の入力メイン関数
 void init_player(WINDOW *win, PLAYER_T *player){
     // memo: cursesの座標指定では、y,x の順で指定する
-    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 ->:u  <-:d");
+    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 (wasdキーで操作)");
     // プレイヤー名の入力
     input_player_name(win, player, 2, 3);
     // 学年の選択
