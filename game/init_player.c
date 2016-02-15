@@ -142,7 +142,7 @@ void set_default_status(PLAYER_T *player){
 // ユーザ情報の入力メイン関数
 void init_player(WINDOW *win, PLAYER_T *player,TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
     // memo: cursesの座標指定では、y,x の順で指定する
-    mvwaddstr(win, 1, 10, "プレイヤー情報を入力 (wasdキーで操作)");
+    //mvwaddstr(win, 2, 10, "プレイヤー情報を入力 (wasdキーで操作)");
     // プレイヤー名の入力
     input_player_name(win, player, 2, 3);
     // 学年の選択
