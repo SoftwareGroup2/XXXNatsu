@@ -8,12 +8,14 @@
 #include "use_curses.h"
 #include "init_player.h"
 
-void init_players(WINDOW *win, PLAYER_T players[]){
+void init_players(WINDOW *win, PLAYER_T players[],TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
     int i;
     for (i = 0; i < 4; i++) {
-        init_player(win, &players[i]);
+        mvwprintw(win, 1, 10, "プレイヤー%dの情報入力(移動はwasdで)",i+1);
+        init_player(win, &players[i],base_cal);
         wclear(win);
         box(win,'|','-');  // 画面を初期化して枠線を描画
+
     }
 }
 
