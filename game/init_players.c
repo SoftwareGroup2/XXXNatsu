@@ -8,7 +8,7 @@
 #include "use_curses.h"
 #include "init_player.h"
 
-void init_players(WINDOW *win, PLAYER_T players[]){
+void init_players(WINDOW *win, PLAYER_T players[],TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
     int i;
     for (i = 0; i < 4; i++) {
         init_player(win, &players[i]);

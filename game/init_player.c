@@ -8,8 +8,9 @@
 #include "def.h"
 #include "var.h"
 #include "use_curses.h"
+#include "init_calender.h"
 
-void init_player(WINDOW *, PLAYER_T *);
+//void init_player(WINDOW *, PLAYER_T *);
 
 // 名前の入力
 void input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
@@ -139,7 +140,7 @@ void set_default_status(PLAYER_T *player){
 }
 
 // ユーザ情報の入力メイン関数
-void init_player(WINDOW *win, PLAYER_T *player){
+void init_player(WINDOW *win, PLAYER_T *player,TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
     // memo: cursesの座標指定では、y,x の順で指定する
     mvwaddstr(win, 1, 10, "プレイヤー情報を入力 (wasdキーで操作)");
     // プレイヤー名の入力
@@ -155,6 +156,10 @@ void init_player(WINDOW *win, PLAYER_T *player){
     // q キーを入力するまで待機
     wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, 5, 1, "qキーを押して終了");
+
+    //カレンダー初期化
+    //init_calender(basecal, int grade, int club, int girlfriend, TROUT_T *player_cal)
+    init_calender(base_cal, player->grade, player->club, player->girlfriend, player->calender);
 
     wwait_q(win);
 
