@@ -10,10 +10,15 @@
 #include "var.h"
 #include "use_curses.h"
 #include "init_player.h"
+#include "program_init.h"
+
 
 int main(void){
 
-    srand((unsigned)time(NULL));
+    TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1];
+
+    program_init(base_cal);
+
 
     init_curses();
 
@@ -25,7 +30,7 @@ int main(void){
     box(win,'|','-');
 
     // 作成した関数
-    init_player(win, &player1);
+    init_player(win, &player1,base_cal);
 
     // windowの終了処理
     wclear(win);
@@ -40,6 +45,8 @@ int main(void){
     printf("充実: %d\n",player1.enhance_p);
     printf("課題: %d\n",player1.task_p);
     printf("日付: %d\n",player1.day);
+
+    disp_calender(player1.calender);
 
     return 0;
 }
