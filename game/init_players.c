@@ -8,15 +8,13 @@
 #include "use_curses.h"
 #include "init_player.h"
 
-int init_players(WINDOW *win, PLAYER_T players[]){
+void init_players(WINDOW *win, PLAYER_T players[]){
     int i;
     for (i = 0; i < 4; i++) {
         init_player(win, &players[i]);
         wclear(win);
         box(win,'|','-');  // 画面を初期化して枠線を描画
     }
-
-    return 0;
 }
 
 // きちんと代入されているか、テスト用関数
