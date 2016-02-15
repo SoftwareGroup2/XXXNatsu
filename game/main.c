@@ -49,10 +49,11 @@ int main(int argc, const char *argv[])
     box(main_win,'|','-');
 
     // プレイヤーの初期化
-    init_players(main_win, players);
+    init_players(main_win, players, base_cal);
     // ゲームメイン
     game_main(main_win, base_cal, players);
     // ゲーム終了
+    box(main_win,'|','-');
     game_end(main_win, players);
 
     // cursesの終了
