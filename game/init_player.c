@@ -130,7 +130,7 @@ void select_club(WINDOW *win, PLAYER_T *player, int y, int x){
 // ユーザの入力を含まない初期値設定
 void set_default_status(PLAYER_T *player){
     player->enhance_p   = 100;  // 充実ポイント
-    player->task_p      = 3000; // 課題ポイント
+    player->task_p      = 1500; // 課題ポイント
     // 彼女の発生確率は1/5
     player->girlfriend  = (rand()%5 ? 0 : 1);
     // この部分では，0~4の乱数を発生させ，0(false)だった場合のみ彼女がいるとする
