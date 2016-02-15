@@ -22,7 +22,7 @@ test-use_curses.out : test-use_curses.c $(OBJ_DIR)/use_curses.o
 test-init_player.out : test-init_player.c $(OBJ_DIR)/init_player.o $(OBJ_DIR)/use_curses.o $(OBJ_DIR)/init_calender.o $(OBJ_DIR)/program_init.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
-test-init_players.out : test-init_players.c $(OBJ_DIR)/init_players.o $(OBJ_DIR)/init_player.o $(OBJ_DIR)/use_curses.o $(OBJ_DIR)/init_calender.o
+test-init_players.out : test-init_players.c $(OBJ_DIR)/init_players.o $(OBJ_DIR)/init_player.o $(OBJ_DIR)/use_curses.o $(OBJ_DIR)/init_calender.o $(OBJ_DIR)/program_init.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
 test-select_active_player.out : test-select_active_player.c $(OBJ_DIR)/select_active_player.o
