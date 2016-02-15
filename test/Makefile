@@ -14,7 +14,7 @@ SRC_DIR= ../game
 
 INCLUDE=-I../game/
 
-all: test-use_curses.out test-init_player.out test-init_players.out test-select_active_player.out test-throw_dice.out test-move_player.out test-game_end.out
+all: test-use_curses.out test-init_player.out test-init_players.out test-select_active_player.out test-throw_dice.out test-move_player.out test-game_end.out test-disp_game_window.out
 
 test-use_curses.out : test-use_curses.c $(OBJ_DIR)/use_curses.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
@@ -38,6 +38,9 @@ test-move_player.out : test-move_player.c $(OBJ_DIR)/move_player.o $(OBJ_DIR)/in
 	$(CC) $(INCLUDE) -o $@ $^
 test-throw_dice.out : test-throw_dice.c $(OBJ_DIR)/throw_dice.o
 	$(CC) $(INCLUDE) -o $@ $^
+
+test-disp_game_window.out : test-disp_game_window.c $(OBJ_DIR)/disp_game_window.o $(OBJ_DIR)/use_curses.o
+	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
 
 test-game_end.out : test-game_end.c $(OBJ_DIR)/game_end.o $(OBJ_DIR)/use_curses.o
 	$(CC) $(INCLUDE) -o $@ $^ $(LCURSES)
