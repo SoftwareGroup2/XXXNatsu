@@ -4,6 +4,8 @@
 #include "def.h"
 #include "var.h"
 
+#include "use_curses.h"
+
 void create_cal(WINDOW *win, int y, int x,PLAYER_T p[])
 {
     int i;
@@ -11,25 +13,39 @@ void create_cal(WINDOW *win, int y, int x,PLAYER_T p[])
 
     mvwaddstr(win, y+ 0, x, "  月  |  火  |  水  |  木  |  金  |  土  |  日  ");
     mvwaddstr(win, y+ 1, x, "------+------+------+------+------+------+------");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+ 2, x, "      |      |      |      |      |  7/19|  7/20");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+ 3, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+ 4, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+ 5, x, "  7/21|  7/22|  7/23|  7/24|  7/25|  7/26|  7/27");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+ 6, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+ 7, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+ 8, x, "  7/28|  7/29|  7/30|  7/31|  8/ 1|  8/ 2|  8/ 3");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+ 9, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+10, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+11, x, "  8/ 4|  8/ 5|  8/ 6|  8/ 7|  8/ 8|  8/ 9|  8/10");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+12, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+13, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+14, x, "  8/11|  8/12|  8/13|  8/14|  8/15|  8/16|  8/17");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+15, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+16, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+17, x, "  8/18|  8/19|  8/20|  8/21|  8/22|  8/23|  8/24");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+18, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+19, x, "      |      |      |      |      |      |      ");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL_SELECT));
     mvwaddstr(win, y+20, x, "  8/25|  8/26|  8/27|  8/28|  8/29|  8/30|  8/31");
+    wattrset(win, COLOR_PAIR(FONT_NORMAL));
     mvwaddstr(win, y+21, x, "      |      |      |      |      |      |      ");
     mvwaddstr(win, y+22, x, "      |      |      |      |      |      |      ");
 
@@ -127,6 +143,7 @@ void main_2(WINDOW *win, PLAYER_T players[4], int player_id){
     char str[2000];
 
     /* 全体ウィンドウタイトル */
+    wclear(win);
     box(win,'|','-');
     sprintf(str,"[ %sの夏休み ]",players[player_id].name);
     mvwaddstr(win,1,45-strlen(players[0].name)/2,str);
