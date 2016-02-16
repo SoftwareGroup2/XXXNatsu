@@ -127,8 +127,10 @@ void main_2(WINDOW *win, PLAYER_T players[4], int player_id){
     char str[2000];
 
     /* 全体ウィンドウタイトル */
+    box(win,'|','-');
     sprintf(str,"[ %sの夏休み ]",players[player_id].name);
     mvwaddstr(win,1,45-strlen(players[0].name)/2,str);
+    wrefresh(win);
 
     /* カレンダーウィンドウ作成 */
     cal = subwin(win,25,50,2,0);

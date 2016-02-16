@@ -33,6 +33,7 @@ void game_end(WINDOW *win, PLAYER_T players[]){
     }
 
     // タイトルの表示
+    wclear(win);
     box(win,'|','-');
     wrefresh(win);
 
@@ -58,6 +59,8 @@ void game_end(WINDOW *win, PLAYER_T players[]){
     }
 
     mvwprintw(win, 30, x_pos+4, "qキーを押してゲームを終了します。");
+
+    wrefresh(win);
 
     wwait_q(win);
 }
