@@ -17,10 +17,10 @@ int main(){
 
     srand(114514);
 
-    strcpy(players[0].name, "aaa");
-    strcpy(players[1].name, "iii");
-    strcpy(players[2].name, "uuu");
-    strcpy(players[3].name, "eee");
+    strcpy(players[0].name, "日本語ああ");
+    strcpy(players[1].name, "あうい");
+    strcpy(players[2].name, "123456789012345");
+    strcpy(players[3].name, "Fooooo");
 
     players[0].task_p = 0;
     players[1].task_p = 0;
