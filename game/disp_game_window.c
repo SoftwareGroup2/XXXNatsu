@@ -105,8 +105,16 @@ void create_info(WINDOW *win,int y,int x,PLAYER_T p[])
             sprintf(girl,"なし");
         }
 
+        char day_str[5];
+
+        if (month == 8 && day == 32){
+            sprintf(day_str, "GOAL");
+        }else{
+            sprintf(day_str, "%d/%2d", month, day);
+        }
+
         mvwprintw(win,3+i,1,"(%d)| %s",i+1,p[i].name);
-        mvwprintw(win,3+i,23,"| %d/%2d | %6d %5d %5d | %4d %4s | %4s |",month,day,p[i].money_p,p[i].enhance_p,p[i].task_p,p[i].grade,club,girl);
+        mvwprintw(win,3+i,23,"| %4s | %6d %5d %5d | %4d %4s | %4s |", day_str, p[i].money_p,p[i].enhance_p,p[i].task_p,p[i].grade,club,girl);
     }
 }
 
