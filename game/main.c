@@ -17,7 +17,7 @@
 #include "disp_game_window.h"
 #include "game_end.h"
 
-void game_main(WINDOW *main_win, TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1], PLAYER_T players[4]){
+void game_main(WINDOW *main_win,PLAYER_T players[4]){
     int i,j;
     int move_player_id;
 
@@ -51,7 +51,7 @@ int main(int argc, const char *argv[])
     // プレイヤーの初期化
     init_players(main_win, players, base_cal);
     // ゲームメイン
-    game_main(main_win, base_cal, players);
+    game_main(main_win,players);
     // ゲーム終了
     box(main_win,'|','-');
     game_end(main_win, players);
