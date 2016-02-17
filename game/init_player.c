@@ -23,6 +23,7 @@ void input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     do{
         wclear(win);
         wrefresh(win);
+        box(win,'|','-'); 
         mvwaddstr(win, y-1, x, "[英語 -> 15文字以内] [日本語 -> 5文字以内]");
         mvwaddstr(win, y, x, "プレイヤー名: ");
         wgetstr(win, player->name);
