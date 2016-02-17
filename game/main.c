@@ -24,8 +24,8 @@ void game_main(WINDOW *main_win, TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]
     // 最後のプレイヤーがゴールするまでループ
     move_player_id = select_active_player(players);
     while(players[move_player_id].day <= 44){
-        main_2(main_win, players, move_player_id);
         move_player(&players[move_player_id]);
+        main_2(main_win, players, move_player_id);
         move_player_id = select_active_player(players);
     }
 }
