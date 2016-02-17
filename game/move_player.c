@@ -1,6 +1,8 @@
 // プレイヤーの移動
 // ステータスの変更
 
+#include <unistd.h>
+
 #include "def.h"
 #include "var.h"
 
@@ -13,6 +15,7 @@ void move_player(PLAYER_T *player){
         // プレイヤーが行動する場合
         // 移動マス決定
         move_day = throw_dice(6);
+        sleep(1);
         if (player->day + move_day <= CALENDER_LEN) {
             // プレイヤーを移動させる
             player->day += move_day;
@@ -27,5 +30,6 @@ void move_player(PLAYER_T *player){
         }
     }else{
         // すでにプレイヤーがゴールしている場合の処理
+        // は他で実装したから無視
     }
 }

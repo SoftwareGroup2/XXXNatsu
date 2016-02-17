@@ -62,14 +62,14 @@ int program_init(TROUT_T base_cal[CALENDER_KIND][CALENDER_LEN+1]){
     // 配列にすべてのカレンダーを読み込む
     // 適宜ファイル名を変更して読み込み部分を作成する
     if(load_base_calender(base_cal[CK_BASE], "../data/base.csv")==FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_1], "../data/grade1.csv")==FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_2], "../data/grade2.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_3], "../data/grade3.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_4], "../data/grade4.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_5], "../data/grade5.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_SPORT], "../data/sport.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_CULTURE], "../data/culture.csv") == FALSE) return FALSE;
-    if(load_base_calender(base_cal[CK_GF], "../data/gf.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_1], "../data/1_basecalender.csv")==FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_2], "../data/2_basecalender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_3], "../data/3_basecalender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_4], "../data/4_basecalender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_5], "../data/5_basecalender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_SPORT], "../data/sports_calender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_CULTURE], "../data/culture_calender.csv") == FALSE) return FALSE;
+    if(load_base_calender(base_cal[CK_GF], "../data/girlfriend_calender.csv") == FALSE) return FALSE;
 
     return TRUE;
 }
