@@ -109,7 +109,7 @@ void create_info(WINDOW *win,int y,int x,PLAYER_T p[])
         mvwprintw(win,3+i,23,"| %d/%2d | %6d %5d %5d | %4d %4s | %4s |",month,day,p[i].money_p,p[i].enhance_p,p[i].task_p,p[i].grade,club,girl);
     }
 }
-
+/*
 void create_ive(WINDOW *win,int y,int x,PLAYER_T p)
 {
     WINDOW *msg;
@@ -137,7 +137,50 @@ void create_ive(WINDOW *win,int y,int x,PLAYER_T p)
     mvwprintw(win,22,1,"   所持金 : %6d",p.calender[p.day].money_p);
     mvwprintw(win,23,1," 移動日数 : %6d",p.calender[p.day].move_day);
 }
+*/
+void create_ive(WINDOW *win,int y,int x,PLAYER_T p)
+{
+    WINDOW *msg;
+    int i,j,k,month,day;
 
+    //月と日
+    if(p.day-13 <= 0){
+        month = 7;
+        day = 19+(p.day-1);
+    }else{
+        month = 8;
+        day = p.day-13;
+    }
+
+
+    mvwprintw(win,1,18,"[%2d/%2dの予定]",month,day);
+
+    msg = subwin(win,17,48,4,51);
+    wclear(msg);
+
+    //日本語のみ正常に表示可能。
+    //途中に半角の文字が入るとつらい。
+    k = 0;
+    i = 1;
+    j = 1;
+    while(p.calender[p.day].content[k] != '\0'){
+        mvwprintw(msg,j,i,"%c%c%c",p.calender[p.day].content[k],p.calender[p.day].content[k+1],p.calender[p.day].content[k+2]);
+        i += 2;
+        k += 3;
+        if(k%23 == 0){
+            i = 1;
+            j++;
+        }
+    }
+
+    wrefresh(msg);
+
+    mvwprintw(win,19,1,"================================================");
+    mvwprintw(win,20,1,"    充実p : %6d",p.calender[p.day].enhance_p);
+    mvwprintw(win,21,1,"    課題p : %6d",p.calender[p.day].task_p);
+    mvwprintw(win,22,1,"   所持金 : %6d",p.calender[p.day].money_p);
+    mvwprintw(win,23,1," 移動日数 : %6d",p.calender[p.day].move_day);
+}
 void main_2(WINDOW *win, PLAYER_T players[4], int player_id){
     WINDOW *cal,*ive,*info;
     char str[2000];
