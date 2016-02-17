@@ -20,9 +20,23 @@ void move_player(PLAYER_T *player){
             // プレイヤーを移動させる
             player->day += move_day;
             // 各種ステータスの変更
-            player->enhance_p += player->calender[player->day].enhance_p;
-            player->task_p += player->calender[player->day].task_p;
-            player->money_p += player->calender[player->day].money_p;
+
+            if (player->calender[player->day].money_p < 0){
+                // お金が必要なイベント
+                if (-(player->calender[player->day].money_p) < player->money_p){
+                    // 持ち金が十分にあったら
+                    player->enhance_p += player->calender[player->day].enhance_p;
+                    player->task_p += player->calender[player->day].task_p;
+                    player->money_p += player->calender[player->day].money_p;
+                }else{
+                    // 持ち金がなかったら何もしない
+                }
+            }else{
+                // お金をもらえるイベント
+                player->enhance_p += player->calender[player->day].enhance_p;
+                player->task_p += player->calender[player->day].task_p;
+                player->money_p += player->calender[player->day].money_p;
+            }
         }else{
             // ゲームクリアした際の処理
             player->day = CALENDER_LEN+1; // とりあえず、最終日の次の日に移動
