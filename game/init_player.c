@@ -4,6 +4,7 @@
 
 #include <time.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "def.h"
 #include "var.h"
@@ -19,9 +20,14 @@ void input_player_name(WINDOW *win, PLAYER_T *player, int y, int x){
     curs_set(1);// カーソルを表示
 
     // このへんの座標指定は適当
-    mvwaddstr(win, y, x, "プレイヤー名: ");
-    wgetstr(win, player->name);
-    wrefresh(win);
+    do{
+        wclear(win);
+        wrefresh(win);
+        box(win,'|','-'); 
+        mvwaddstr(win, y-1, x, "[英語 -> 15文字以内] [日本語 -> 5文字以内]");
+        mvwaddstr(win, y, x, "プレイヤー名: ");
+        wgetstr(win, player->name);
+    }while((strlen(player->name) > 15));
 }
 
 // 学年の選択
@@ -144,23 +150,22 @@ void init_player(WINDOW *win, PLAYER_T *player,TROUT_T base_cal[CALENDER_KIND][C
     // memo: cursesの座標指定では、y,x の順で指定する
     //mvwaddstr(win, 2, 10, "プレイヤー情報を入力 (wasdキーで操作)");
     // プレイヤー名の入力
-    input_player_name(win, player, 2, 3);
+    input_player_name(win, player, 3, 3);
     // 学年の選択
-    select_grade(win, player, 3, 11);
+    select_grade(win, player, 4, 11);
     // 部活の選択
-    select_club(win, player, 4, 9);
+    select_club(win, player, 5, 9);
 
     // デフォルトステータスの入力
     set_default_status(player);
 
     // q キーを入力するまで待機
     wattrset(win, COLOR_PAIR(FONT_NORMAL));
-    mvwaddstr(win, 5, 1, "qキーを押して終了");
+    // mvwaddstr(win, 5, 1, "qキーを押して終了");
 
     //カレンダー初期化
     //init_calender(basecal, int grade, int club, int girlfriend, TROUT_T *player_cal)
     init_calender(base_cal, player->grade, player->club, player->girlfriend, player->calender);
 
-    wwait_q(win);
-
+    // wwait_q(win);
 }
