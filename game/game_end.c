@@ -47,7 +47,9 @@ void game_end(WINDOW *win, PLAYER_T players[]){
     // 課題ポイントが残っていない人
     for (i = 0; i < 4; i++) {
         if (players[id[i]].task_p <= 0){
-            mvwprintw(win,r_cnt+20, x_pos, "%d位: %18s, 充実P: %6d 課題P: %6d", r_cnt+1, players[id[i]].name, players[id[i]].enhance_p, players[id[i]].task_p);
+            mvwprintw(win,r_cnt+20, x_pos, "%d位: %15s, 充実P: %6d 課題P: %6d", r_cnt+1, "", players[id[i]].enhance_p, players[id[i]].task_p);
+            // 絶対に文字数が決定しているので，%15sのようなことはしない．
+            mvwprintw(win,r_cnt+20, x_pos+5, "%s", players[id[i]].name);
             r_cnt++;
             use_id[i] = 1;
         }
@@ -56,7 +58,11 @@ void game_end(WINDOW *win, PLAYER_T players[]){
     // 課題ポイントが残っている人
     for (i = 0; i < 4; i++) {
         if (use_id[i] == 0){
-            mvwprintw(win,r_cnt+20, x_pos, "%d位: %18s, 充実P: %6d 課題P: %6d", r_cnt+1, players[id[i]].name, players[id[i]].enhance_p, players[id[i]].task_p);
+            mvwprintw(win,r_cnt+20, x_pos, "%d位: %15s, 充実P: %6d 課題P: %6d", r_cnt+1, "", players[id[i]].enhance_p, players[id[i]].task_p);
+ 
+            // 絶対に文字数が決定しているので，%15sのようなことはしない．
+            mvwprintw(win,r_cnt+20, x_pos+5, "%s", players[id[i]].name);
+ 
             r_cnt++;
         }
     }
