@@ -1,6 +1,8 @@
 // プレイヤーの移動
 // ステータスの変更
 
+#include <curses.h>
+
 #include <unistd.h>
 
 #include "def.h"
@@ -8,14 +10,20 @@
 
 #include "throw_dice.h"
 
-void move_player(PLAYER_T *player){
+
+void move_player(PLAYER_T *player, WINDOW *win){
     int move_day;
 
     if (player->day <= 44) {
         // プレイヤーが行動する場合
         // 移動マス決定
         move_day = throw_dice(6);
-        sleep(1);
+
+        // Enter入力待ち
+        wtimeout(stdscr, 100);
+        cbreak();
+        while (wgetch(win) != '\n');
+
         if (player->day + move_day <= CALENDER_LEN) {
             // プレイヤーを移動させる
             player->day += move_day;
