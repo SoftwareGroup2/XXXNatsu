@@ -34,6 +34,7 @@ void wwait_q(WINDOW *win){
     while (wgetch(win) != 'q');
 }
 
+
 // cursesの終了処理
 void end_curses(void){
     endwin();
